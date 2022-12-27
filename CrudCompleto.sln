@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pessoa.Domain", "Pessoa.Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pessoa.Application", "Pessoa.Application\Pessoa.Application.csproj", "{DC34382A-59CA-454E-BC67-A33A9D46732D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pessoa.API", "Pessoa.API\Pessoa.API.csproj", "{3BCD8273-EA96-4752-9AB5-50E0B9BBB76D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +28,14 @@ Global
 		{DC34382A-59CA-454E-BC67-A33A9D46732D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC34382A-59CA-454E-BC67-A33A9D46732D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC34382A-59CA-454E-BC67-A33A9D46732D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BCD8273-EA96-4752-9AB5-50E0B9BBB76D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BCD8273-EA96-4752-9AB5-50E0B9BBB76D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BCD8273-EA96-4752-9AB5-50E0B9BBB76D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BCD8273-EA96-4752-9AB5-50E0B9BBB76D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{02897F80-8104-43FD-9891-716568BE5628} = {E11FD072-E63E-4B6D-BE0F-812C6B8EB7F6}
 		{DC34382A-59CA-454E-BC67-A33A9D46732D} = {BAACE709-6722-4207-960D-A89451BB9399}
+		{3BCD8273-EA96-4752-9AB5-50E0B9BBB76D} = {2EEABA04-98CE-433E-A52C-6E993C4E68C2}
 	EndGlobalSection
 EndGlobal
