@@ -3,7 +3,7 @@ using Pessoa.Domain.Entities.Enums;
 
 namespace Pessoa.Domain.Entities;
 
-public class Pessoa : BaseEntity
+public abstract class Pessoa : BaseEntity
 {
     public string Nome { get; private set; }
     public string Email { get; private set; }

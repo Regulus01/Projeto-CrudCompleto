@@ -15,4 +15,8 @@
       <ProjectReference Include="..\Pessoa.Domain\Pessoa.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="AppService" />
+    </ItemGroup>
+
 </Project>
