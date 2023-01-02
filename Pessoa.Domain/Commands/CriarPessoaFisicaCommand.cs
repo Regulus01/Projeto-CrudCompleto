@@ -1,7 +1,9 @@
-﻿namespace Pessoa.Domain.Commands;
+﻿using Pessoa.Domain.Commands.Base;
+
+namespace Pessoa.Domain.Commands;
 
 public class CriarPessoaFisicaCommand : CriarPessoaBaseCommand
 {
-    public string Cpf { get; set; }
-    public string Idade { get; set; }
+    public string Cpf { get; private set; }
+    public string Idade { get; private set; }
 }

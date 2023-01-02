@@ -4,9 +4,9 @@ namespace Pessoa.Application.ViewModels;
 
 public class EnderecoViewModel
 {
-    public string Nome { get; set; }
-    public string Email { get; set; }
-    public string Telefone { get; set; }
-    public EnderecoViewModel Endereco { get; set; }
-    public PessoaTipo Tipo { get; set; }
+    public string Cep { get; set; }
+    public string Logradouro { get; set; }
+    public string Complemento { get; set; }
+    public string Bairro { get; set; }
+    public string Uf { get; set; }
 }

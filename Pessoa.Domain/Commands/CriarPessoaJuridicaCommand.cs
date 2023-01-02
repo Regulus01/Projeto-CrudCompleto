@@ -1,6 +1,8 @@
-﻿namespace Pessoa.Domain.Commands;
+﻿using Pessoa.Domain.Commands.Base;
+
+namespace Pessoa.Domain.Commands;
 
 public class CriarPessoaJuridicaCommand : CriarPessoaBaseCommand
 {
-    public string Cnpj { get; set; }
+    public string Cnpj { get; private set; }
 }

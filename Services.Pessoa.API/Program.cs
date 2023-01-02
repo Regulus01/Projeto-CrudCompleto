@@ -1,19 +1,24 @@
 using System.Data.Common;
+using System.Reflection;
+using AutoMapper;
 using Infra.Pessoa.Common;
+using Infra.Pessoa.DependencyInjection;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Npgsql;
+using Pessoa.Application.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //DbConnection
-var connectionString = builder.Configuration.GetConnectionString("Config/App");
+var connectionString = builder.Configuration.GetConnectionString("App");
 DbConnection dbConnection = new NpgsqlConnection(connectionString);
 builder.Services.AddDbContext<PessoaContext>(opt =>
 {
@@ -21,7 +26,34 @@ builder.Services.AddDbContext<PessoaContext>(opt =>
         assembly.MigrationsAssembly(typeof(PessoaContext).Assembly.FullName));
 });
 
+//Mediatr
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
+//Mapper
+var mapper = AutoMapperConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+PessoaDependecyInjection.Register(builder.Services);
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Crud Completo",
+        Description = "Crud completo"
+
+    });
+  
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+
+  
+});
+
+builder.Services.AddCors();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,6 +64,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(x =>
+{
+    x.AllowAnyHeader();
+    x.AllowAnyMethod();
+    x.AllowAnyOrigin();
+});
 
 app.UseAuthorization();
 

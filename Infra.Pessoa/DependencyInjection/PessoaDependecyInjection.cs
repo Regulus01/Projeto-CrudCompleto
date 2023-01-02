@@ -1,6 +1,8 @@
-﻿using Infra.Pessoa.Interface;
-using Infra.Pessoa.Repository;
+﻿using Infra.Pessoa.Repository;
 using Microsoft.Extensions.DependencyInjection;
+using Pessoa.Application.AppService;
+using Pessoa.Application.Interface;
+using Pessoa.Domain.Interface;
 
 namespace Infra.Pessoa.DependencyInjection;
 
@@ -14,5 +16,6 @@ public class PessoaDependecyInjection
     private static void RepositoryDependence(IServiceCollection serviceProvider)
     {
         serviceProvider.AddScoped<IPessoaRepository, PessoaRepository>();
+        serviceProvider.AddScoped<IPessoaAppService, PessoaAppService>();
     }
 }
