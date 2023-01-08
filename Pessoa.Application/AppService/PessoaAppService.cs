@@ -29,13 +29,33 @@ public class PessoaAppService : IPessoaAppService
         if (_repository.ObterEmailCadastrado(pessoa.Email))
             return null;
 
-        if (!DocumentValidator.ValidaCPF.IsCpf(pessoa.Cpf))
+        if (!DocumentValidator.IsCpf(pessoa.Cpf))
             return null;
 
         if (pessoa.Endereco.Uf.Length != 2)
             return null;
         
         var command = _mapper.Map<PessoaFisicaViewModel, CriarPessoaFisicaCommand>(pessoa);
+        
+        var result = await _mediator.Send(command);
+
+        return result;
+    }
+    public async Task<string?> CriarPessoaJuridica(PessoaJuridicaViewModel? pessoa)
+    {
+        if (pessoa == null)
+            return null;
+        
+        if (_repository.ObterEmailCadastrado(pessoa.Email))
+            return null;
+
+        if (!DocumentValidator.IsCnpj(pessoa.Cnpj))
+            return null;
+
+        if (pessoa.Endereco.Uf.Length != 2)
+            return null;
+        
+        var command = _mapper.Map<PessoaJuridicaViewModel, CriarPessoaJuridicaCommand>(pessoa);
         
         var result = await _mediator.Send(command);
 

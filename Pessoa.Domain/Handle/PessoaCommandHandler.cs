@@ -21,8 +21,7 @@ public class PessoaCommandHandler : IRequestHandler<CriarPessoaFisicaCommand, st
         _mapper = mapper;
         _mediator = mediator;
     }
-
-
+    
     public Task<string> Handle(CriarPessoaFisicaCommand command, CancellationToken cancellationToken)
     {
         var pessoa = _mapper.Map<CriarPessoaFisicaCommand, PessoaFisica>(command);
@@ -41,19 +40,13 @@ public class PessoaCommandHandler : IRequestHandler<CriarPessoaFisicaCommand, st
         {
             _mediator.Publish(new PessoaCriadaNotification { Nome = pessoa.Nome, Email = pessoa.Email }, cancellationToken);
             _mediator.Publish(new ErroNotification { Excecao = ex.Message, PilhaErro = ex.StackTrace }, cancellationToken);
+            
             return Task.FromResult("Ocorreu um erro no momento da alteração: ");
         }
     }
 
     public Task<string> Handle(CriarPessoaJuridicaCommand command, CancellationToken cancellationToken)
     {
-        if (command == null)
-            return null;
-        
-
-        if (_repository.ObterEmailCadastrado(command.Email))
-            return null;
-
         var pessoa = _mapper.Map<CriarPessoaJuridicaCommand, PessoaJuridica>(command);
 
         try
@@ -61,12 +54,14 @@ public class PessoaCommandHandler : IRequestHandler<CriarPessoaFisicaCommand, st
             _repository.AdicionarPessoaJuridica(pessoa);
             _mediator.Publish(new PessoaCriadaNotification { Nome = pessoa.Nome, Email = pessoa.Email }, cancellationToken);
 
-            return Task.FromResult("Pessoa fisica Criada");
+            _repository.Commit();
+            return Task.FromResult("Pessoa Juridica Criada");
         }
         catch (Exception ex)
         {
             _mediator.Publish(new PessoaCriadaNotification { Nome = pessoa.Nome, Email = pessoa.Email }, cancellationToken);
             _mediator.Publish(new ErroNotification { Excecao = ex.Message, PilhaErro = ex.StackTrace }, cancellationToken);
+            
             return Task.FromResult("Ocorreu um erro no momento da alteração");
         }
     }

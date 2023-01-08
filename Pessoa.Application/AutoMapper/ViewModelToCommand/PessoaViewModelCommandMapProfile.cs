@@ -9,5 +9,6 @@ public class PessoaViewModelCommandMapProfile : Profile
     public PessoaViewModelCommandMapProfile()
     {
         CreateMap<PessoaFisicaViewModel, CriarPessoaFisicaCommand>().ReverseMap();
+        CreateMap<PessoaJuridicaViewModel, CriarPessoaJuridicaCommand>().ReverseMap();
     }
 }
