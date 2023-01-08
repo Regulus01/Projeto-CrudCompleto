@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Infra.CrossCruting.Validators;
 using MediatR;
 using Pessoa.Application.Interface;
 using Pessoa.Application.ViewModels;
@@ -28,6 +29,12 @@ public class PessoaAppService : IPessoaAppService
         if (_repository.ObterEmailCadastrado(pessoa.Email))
             return null;
 
+        if (!DocumentValidator.ValidaCPF.IsCpf(pessoa.Cpf))
+            return null;
+
+        if (pessoa.Endereco.Uf.Length != 2)
+            return null;
+        
         var command = _mapper.Map<PessoaFisicaViewModel, CriarPessoaFisicaCommand>(pessoa);
         
         var result = await _mediator.Send(command);

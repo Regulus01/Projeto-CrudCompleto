@@ -31,9 +31,13 @@ public class EnderecoMap : IEntityTypeConfiguration<Endereco>
         builder.Property(x => x.Logradouro)
             .HasColumnName("End_Logradouro");
         
-        builder.Property(x => x.CriadoEm)
-            .HasColumnName("Pes_CriadoEm")
-            .IsRequired();
+        builder.HasOne(x => x.PessoaFisica)
+            .WithOne(x => x.Endereco)
+            .HasForeignKey<Endereco>(x => x.Id);
+        
+        builder.HasOne(x => x.PessoaJuridica)
+            .WithOne(x => x.Endereco)
+            .HasForeignKey<Endereco>(x => x.Id);
 
         builder.ToTable("End_Endereco");
     }

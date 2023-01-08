@@ -20,8 +20,7 @@ public class PessoaJuridicaMap : BasePessoaMap<PessoaJuridica>
             .HasMaxLength(14)
             .IsRequired();
         
-        builder.HasOne(x => x.Endereco)
-            .WithOne(x => x.PessoaJuridica)
-            .HasForeignKey<PessoaJuridica>(x => x.Id);
+        builder.Property(x => x.EnderecoId)
+            .HasColumnName("End_EnderecoId");
     }
 }

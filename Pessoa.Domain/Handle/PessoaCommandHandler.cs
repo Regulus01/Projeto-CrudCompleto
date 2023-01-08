@@ -26,6 +26,8 @@ public class PessoaCommandHandler : IRequestHandler<CriarPessoaFisicaCommand, st
     public Task<string> Handle(CriarPessoaFisicaCommand command, CancellationToken cancellationToken)
     {
         var pessoa = _mapper.Map<CriarPessoaFisicaCommand, PessoaFisica>(command);
+        
+        pessoa.InformeCriacao(DateTimeOffset.UtcNow);
 
         try
         {

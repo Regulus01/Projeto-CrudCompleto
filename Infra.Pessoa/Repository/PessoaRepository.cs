@@ -44,7 +44,6 @@ public class PessoaRepository : IPessoaRepository
     public void Commit()
     {
         _context.SaveChanges();
-        Console.WriteLine("???");
     }
 
 }
