@@ -43,5 +43,9 @@ public class BasePessoaMap<TDomain> : IEntityTypeConfiguration<TDomain>
         builder.Property(x => x.CriadoEm)
             .HasColumnName("Pes_CriadoEm")
             .IsRequired();
+        
+        builder.Property(x => x.EnderecoId)
+            .HasColumnName("End_EnderecoId")
+            .IsRequired();
     }
 }

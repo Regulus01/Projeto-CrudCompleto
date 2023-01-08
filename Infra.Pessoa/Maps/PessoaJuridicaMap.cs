@@ -19,8 +19,5 @@ public class PessoaJuridicaMap : BasePessoaMap<PessoaJuridica>
             .HasColumnName("PeJ_Cnpj")
             .HasMaxLength(14)
             .IsRequired();
-        
-        builder.Property(x => x.EnderecoId)
-            .HasColumnName("End_EnderecoId");
     }
 }

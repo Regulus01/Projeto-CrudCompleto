@@ -23,8 +23,5 @@ public class PessoaFisicaMap : BasePessoaMap<PessoaFisica>
         builder.Property(x => x.Idade)
             .HasColumnName("PeF_Idade")
             .IsRequired();
-
-        builder.Property(x => x.EnderecoId)
-            .HasColumnName("End_EnderecoId");
     }
 }

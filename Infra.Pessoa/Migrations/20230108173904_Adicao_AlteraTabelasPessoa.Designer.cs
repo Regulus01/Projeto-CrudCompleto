@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infra.Pessoa.Migrations
 {
     [DbContext(typeof(PessoaContext))]
-    [Migration("20230108152138_Correcao_TabelaPessoaEndereco")]
-    partial class CorrecaoTabelaPessoaEndereco
+    [Migration("20230108173904_Adicao_AlteraTabelasPessoa")]
+    partial class AdicaoAlteraTabelasPessoa
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,7 +77,7 @@ namespace Infra.Pessoa.Migrations
                         .HasColumnType("character varying(11)")
                         .HasColumnName("PeF_Cpf");
 
-                    b.Property<DateTime>("CriadoEm")
+                    b.Property<DateTimeOffset>("CriadoEm")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("Pes_CriadoEm");
 
@@ -111,6 +111,9 @@ namespace Infra.Pessoa.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EnderecoId")
+                        .IsUnique();
+
                     b.ToTable("PeF_PessoaFisica", (string)null);
                 });
 
@@ -127,7 +130,7 @@ namespace Infra.Pessoa.Migrations
                         .HasColumnType("character varying(14)")
                         .HasColumnName("PeJ_Cnpj");
 
-                    b.Property<DateTime>("CriadoEm")
+                    b.Property<DateTimeOffset>("CriadoEm")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("Pes_CriadoEm");
 
@@ -156,37 +159,40 @@ namespace Infra.Pessoa.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EnderecoId")
+                        .IsUnique();
+
                     b.ToTable("PeJ_PessoaJuridica", (string)null);
-                });
-
-            modelBuilder.Entity("Pessoa.Domain.Entities.Endereco", b =>
-                {
-                    b.HasOne("Pessoa.Domain.Entities.PessoaFisica", "PessoaFisica")
-                        .WithOne("Endereco")
-                        .HasForeignKey("Pessoa.Domain.Entities.Endereco", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Pessoa.Domain.Entities.PessoaJuridica", "PessoaJuridica")
-                        .WithOne("Endereco")
-                        .HasForeignKey("Pessoa.Domain.Entities.Endereco", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PessoaFisica");
-
-                    b.Navigation("PessoaJuridica");
                 });
 
             modelBuilder.Entity("Pessoa.Domain.Entities.PessoaFisica", b =>
                 {
-                    b.Navigation("Endereco")
+                    b.HasOne("Pessoa.Domain.Entities.Endereco", "Endereco")
+                        .WithOne("PessoaFisica")
+                        .HasForeignKey("Pessoa.Domain.Entities.PessoaFisica", "EnderecoId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Endereco");
                 });
 
             modelBuilder.Entity("Pessoa.Domain.Entities.PessoaJuridica", b =>
                 {
-                    b.Navigation("Endereco")
+                    b.HasOne("Pessoa.Domain.Entities.Endereco", "Endereco")
+                        .WithOne("PessoaJuridica")
+                        .HasForeignKey("Pessoa.Domain.Entities.PessoaJuridica", "EnderecoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Endereco");
+                });
+
+            modelBuilder.Entity("Pessoa.Domain.Entities.Endereco", b =>
+                {
+                    b.Navigation("PessoaFisica")
+                        .IsRequired();
+
+                    b.Navigation("PessoaJuridica")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

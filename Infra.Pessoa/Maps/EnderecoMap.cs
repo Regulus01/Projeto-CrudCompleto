@@ -33,11 +33,11 @@ public class EnderecoMap : IEntityTypeConfiguration<Endereco>
         
         builder.HasOne(x => x.PessoaFisica)
             .WithOne(x => x.Endereco)
-            .HasForeignKey<Endereco>(x => x.Id);
+            .HasForeignKey<PessoaFisica>(x => x.EnderecoId);
         
         builder.HasOne(x => x.PessoaJuridica)
             .WithOne(x => x.Endereco)
-            .HasForeignKey<Endereco>(x => x.Id);
+            .HasForeignKey<PessoaJuridica>(x => x.EnderecoId);
 
         builder.ToTable("End_Endereco");
     }

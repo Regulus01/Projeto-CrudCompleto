@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infra.Pessoa.Migrations
 {
     /// <inheritdoc />
-    public partial class CorrecaoTabelaPessoaEndereco : Migration
+    public partial class AdicaoAlteraTabelasPessoa : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,20 +45,32 @@ namespace Infra.Pessoa.Migrations
                 nullable: false,
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 
+            migrationBuilder.CreateIndex(
+                name: "IX_PeJ_PessoaJuridica_End_EnderecoId",
+                table: "PeJ_PessoaJuridica",
+                column: "End_EnderecoId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PeF_PessoaFisica_End_EnderecoId",
+                table: "PeF_PessoaFisica",
+                column: "End_EnderecoId",
+                unique: true);
+
             migrationBuilder.AddForeignKey(
-                name: "FK_End_Endereco_PeF_PessoaFisica_End_Id",
-                table: "End_Endereco",
-                column: "End_Id",
-                principalTable: "PeF_PessoaFisica",
-                principalColumn: "Pes_Id",
+                name: "FK_PeF_PessoaFisica_End_Endereco_End_EnderecoId",
+                table: "PeF_PessoaFisica",
+                column: "End_EnderecoId",
+                principalTable: "End_Endereco",
+                principalColumn: "End_Id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_End_Endereco_PeJ_PessoaJuridica_End_Id",
-                table: "End_Endereco",
-                column: "End_Id",
-                principalTable: "PeJ_PessoaJuridica",
-                principalColumn: "Pes_Id",
+                name: "FK_PeJ_PessoaJuridica_End_Endereco_End_EnderecoId",
+                table: "PeJ_PessoaJuridica",
+                column: "End_EnderecoId",
+                principalTable: "End_Endereco",
+                principalColumn: "End_Id",
                 onDelete: ReferentialAction.Cascade);
         }
 
@@ -66,12 +78,20 @@ namespace Infra.Pessoa.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_End_Endereco_PeF_PessoaFisica_End_Id",
-                table: "End_Endereco");
+                name: "FK_PeF_PessoaFisica_End_Endereco_End_EnderecoId",
+                table: "PeF_PessoaFisica");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_End_Endereco_PeJ_PessoaJuridica_End_Id",
-                table: "End_Endereco");
+                name: "FK_PeJ_PessoaJuridica_End_Endereco_End_EnderecoId",
+                table: "PeJ_PessoaJuridica");
+
+            migrationBuilder.DropIndex(
+                name: "IX_PeJ_PessoaJuridica_End_EnderecoId",
+                table: "PeJ_PessoaJuridica");
+
+            migrationBuilder.DropIndex(
+                name: "IX_PeF_PessoaFisica_End_EnderecoId",
+                table: "PeF_PessoaFisica");
 
             migrationBuilder.DropColumn(
                 name: "End_EnderecoId",

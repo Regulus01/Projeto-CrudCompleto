@@ -1,6 +1,4 @@
-﻿using Pessoa.Domain.Entities.Base;
-
-namespace Pessoa.Domain.Entities;
+﻿namespace Pessoa.Domain.Entities;
 
 public class Endereco
 {
@@ -12,4 +10,5 @@ public class Endereco
     public string Uf { get; private set; }
     public virtual PessoaFisica PessoaFisica { get; private set; }
     public virtual PessoaJuridica PessoaJuridica { get; private set; }
+
 }
