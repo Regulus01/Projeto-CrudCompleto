@@ -4,7 +4,7 @@ using Pessoa.Domain.Entities;
 
 namespace Pessoa.Application.AutoMapper.CommandToDomain;
 
-public class PessoaCommandMapProfile: Profile
+public class PessoaCommandMapProfile : Profile
 {
     public PessoaCommandMapProfile()
     {

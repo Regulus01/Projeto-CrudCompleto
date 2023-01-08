@@ -35,7 +35,7 @@ public class PessoaAppService : IPessoaAppService
         if (pessoa.Endereco.Uf.Length != 2)
             return null;
         
-        var command = _mapper.Map<PessoaFisicaViewModel, CriarPessoaFisicaCommand>(pessoa);
+        var command = _mapper.Map<CriarPessoaFisicaCommand>(pessoa);
         
         var result = await _mediator.Send(command);
 
@@ -55,10 +55,24 @@ public class PessoaAppService : IPessoaAppService
         if (pessoa.Endereco.Uf.Length != 2)
             return null;
         
-        var command = _mapper.Map<PessoaJuridicaViewModel, CriarPessoaJuridicaCommand>(pessoa);
+        var command = _mapper.Map<CriarPessoaJuridicaCommand>(pessoa);
         
         var result = await _mediator.Send(command);
 
         return result;
+    }
+
+    public Task<List<PessoaViewModelGrid>> ObterPessoasCadastradas()
+    {
+        var pessoasFisicas = _repository.ObterPessoasFisicas();
+        var pessoasJuridicas = _repository.ObterPessoasJuridicas();
+
+        var pessoasGrid = new List<PessoaViewModelGrid>();
+        
+        pessoasGrid.AddRange(_mapper.Map<IEnumerable<PessoaViewModelGrid>>(pessoasFisicas));
+        pessoasGrid.AddRange(_mapper.Map<IEnumerable<PessoaViewModelGrid>>(pessoasJuridicas));
+
+        return Task.FromResult(pessoasGrid);
+
     }
 }

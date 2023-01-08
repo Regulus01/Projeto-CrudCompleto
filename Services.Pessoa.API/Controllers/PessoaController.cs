@@ -15,7 +15,7 @@ public class PessoaController : ControllerBase
     }
     
     /// <summary>
-    ///     EndPoint authorize para criar uma pessoa fisica
+    ///     EndPoint para criar uma pessoa fisica
     /// </summary>
     ///  <remarks>
     ///       End point usado para criar produto utilizando uma pessoa fisica a partir de uma viewModel
@@ -39,7 +39,7 @@ public class PessoaController : ControllerBase
     }
     
     /// <summary>
-    ///     EndPoint authorize para criar uma pessoa Juridica
+    ///     EndPoint para criar uma pessoa Juridica
     /// </summary>
     ///  <remarks>
     ///       End point usado para criar produto utilizando uma pessoa fisica a partir de uma viewModel
@@ -58,6 +58,24 @@ public class PessoaController : ControllerBase
         {
             return BadRequest(request);
         }
+        
+        return Ok(request);
+    }
+
+    /// <summary>
+    ///     EndPoint para obter pessoas cadastradas
+    /// </summary>
+    ///  <remarks>
+    ///       EndPoint para obter pessoas cadastradas no sistema
+    ///  </remarks>
+    /// <returns>
+    ///     Pessoas cadastradas
+    /// </returns>
+    /// <response code="200"> Pessoas cadastradas </response>
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<PessoaViewModelGrid>>> GetAll()
+    {
+        var request = _appService.ObterPessoasCadastradas();
         
         return Ok(request);
     }

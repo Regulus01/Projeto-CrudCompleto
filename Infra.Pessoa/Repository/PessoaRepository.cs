@@ -23,6 +23,16 @@ public class PessoaRepository : IPessoaRepository
         throw new NotImplementedException();
     }
 
+    public IEnumerable<PessoaFisica> ObterPessoasFisicas()
+    {
+        return _context.PessoaFisica.OrderBy(x => x.Nome)
+                                    .ThenBy(x => x.Email);
+    }
+    public IEnumerable<PessoaJuridica> ObterPessoasJuridicas()
+    {
+        return _context.PessoaJuridica.OrderBy(x => x.Nome)
+                                      .ThenBy(x => x.Email);
+    }
     public bool ObterEmailCadastrado(string email)
     {
         var pessoaFisica = _context.PessoaFisica.FirstOrDefault(x => x.Email == email);

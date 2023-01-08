@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Pessoa.Application.AutoMapper.CommandToDomain;
+using Pessoa.Application.AutoMapper.DomainToViewModel;
 using Pessoa.Application.AutoMapper.ViewModelToCommand;
 using Pessoa.Application.AutoMapper.ViewModelToDomain;
 
@@ -15,6 +16,7 @@ public static class AutoMapperConfig
             config.AddProfile<EnderecoMappingProfile>();
             config.AddProfile<PessoaCommandMapProfile>();
             config.AddProfile<PessoaViewModelCommandMapProfile>();
+            config.AddProfile<PessoaDomainToViewModelGridProfile>();
         });
 
     }

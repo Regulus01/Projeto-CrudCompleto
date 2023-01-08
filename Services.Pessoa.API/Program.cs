@@ -1,14 +1,10 @@
 using System.Data.Common;
 using System.Reflection;
-using AutoMapper;
 using Infra.Pessoa.Common;
 using Infra.Pessoa.DependencyInjection;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Npgsql;
-using Pessoa.Application.AutoMapper;
-using Pessoa.Domain.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 
