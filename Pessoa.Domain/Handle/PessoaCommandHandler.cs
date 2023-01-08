@@ -33,7 +33,7 @@ public class PessoaCommandHandler : IRequestHandler<CriarPessoaFisicaCommand, st
             _mediator.Publish(new PessoaCriadaNotification { Nome = pessoa.Nome, Email = pessoa.Email }, cancellationToken);
             
             _repository.Commit();
-            return Task.FromResult("Pessoa fisica Criada");
+            return Task.FromResult("Pessoa fisica Criada.");
         }
         catch (Exception ex)
         {
