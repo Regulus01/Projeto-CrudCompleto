@@ -23,25 +23,27 @@ public class PessoaCommandHandler : IRequestHandler<CriarPessoaFisicaCommand, st
     }
 
 
-    public async Task<string> Handle(CriarPessoaFisicaCommand command, CancellationToken cancellationToken)
+    public Task<string> Handle(CriarPessoaFisicaCommand command, CancellationToken cancellationToken)
     {
         var pessoa = _mapper.Map<CriarPessoaFisicaCommand, PessoaFisica>(command);
 
         try
         {
             _repository.AdicionarPessoaFisica(pessoa);
-            await _mediator.Publish(new PessoaCriadaNotification { Nome = pessoa.Nome, Email = pessoa.Email });
-            return await Task.FromResult("Pessoa fisica Criada");
+            _mediator.Publish(new PessoaCriadaNotification { Nome = pessoa.Nome, Email = pessoa.Email }, cancellationToken);
+            
+            _repository.Commit();
+            return Task.FromResult("Pessoa fisica Criada");
         }
         catch (Exception ex)
         {
-            await _mediator.Publish(new PessoaCriadaNotification { Nome = pessoa.Nome, Email = pessoa.Email });
-            await _mediator.Publish(new ErroNotification { Excecao = ex.Message, PilhaErro = ex.StackTrace });
-            return await Task.FromResult("Ocorreu um erro no momento da alteração");
+            _mediator.Publish(new PessoaCriadaNotification { Nome = pessoa.Nome, Email = pessoa.Email }, cancellationToken);
+            _mediator.Publish(new ErroNotification { Excecao = ex.Message, PilhaErro = ex.StackTrace }, cancellationToken);
+            return Task.FromResult("Ocorreu um erro no momento da alteração: ");
         }
     }
 
-    public async Task<string> Handle(CriarPessoaJuridicaCommand command, CancellationToken cancellationToken)
+    public Task<string> Handle(CriarPessoaJuridicaCommand command, CancellationToken cancellationToken)
     {
         if (command == null)
             return null;
@@ -55,15 +57,15 @@ public class PessoaCommandHandler : IRequestHandler<CriarPessoaFisicaCommand, st
         try
         {
             _repository.AdicionarPessoaJuridica(pessoa);
-            await _mediator.Publish(new PessoaCriadaNotification { Nome = pessoa.Nome, Email = pessoa.Email });
+            _mediator.Publish(new PessoaCriadaNotification { Nome = pessoa.Nome, Email = pessoa.Email }, cancellationToken);
 
-            return await Task.FromResult("Pessoa fisica Criada");
+            return Task.FromResult("Pessoa fisica Criada");
         }
         catch (Exception ex)
         {
-            await _mediator.Publish(new PessoaCriadaNotification { Nome = pessoa.Nome, Email = pessoa.Email });
-            await _mediator.Publish(new ErroNotification { Excecao = ex.Message, PilhaErro = ex.StackTrace });
-            return await Task.FromResult("Ocorreu um erro no momento da alteração");
+            _mediator.Publish(new PessoaCriadaNotification { Nome = pessoa.Nome, Email = pessoa.Email }, cancellationToken);
+            _mediator.Publish(new ErroNotification { Excecao = ex.Message, PilhaErro = ex.StackTrace }, cancellationToken);
+            return Task.FromResult("Ocorreu um erro no momento da alteração");
         }
     }
 }

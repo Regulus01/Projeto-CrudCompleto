@@ -30,16 +30,21 @@ public class PessoaRepository : IPessoaRepository
 
         return pessoaFisica != null || pessoaJuridica != null;
     }
-    
+
     public void AdicionarPessoaFisica(PessoaFisica pessoa)
     {
         _context.Add(pessoa);
-        _context.SaveChanges();
     }
 
     public void AdicionarPessoaJuridica(PessoaJuridica pessoa)
     {
         _context.Add(pessoa);
-        _context.SaveChanges();
     }
+
+    public void Commit()
+    {
+        _context.SaveChanges();
+        Console.WriteLine("???");
+    }
+
 }

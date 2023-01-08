@@ -9,4 +9,5 @@ public interface IPessoaRepository
     bool ObterEmailCadastrado(string email);
     void AdicionarPessoaFisica(PessoaFisica pessoa);
     void AdicionarPessoaJuridica(PessoaJuridica pessoa);
+    void Commit();
 }

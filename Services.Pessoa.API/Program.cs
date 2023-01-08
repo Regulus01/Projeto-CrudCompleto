@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Npgsql;
 using Pessoa.Application.AutoMapper;
+using Pessoa.Domain.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,13 +27,6 @@ builder.Services.AddDbContext<PessoaContext>(opt =>
         assembly.MigrationsAssembly(typeof(PessoaContext).Assembly.FullName));
 });
 
-//Mediatr
-builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
-
-//Mapper
-var mapper = AutoMapperConfig.RegisterMaps().CreateMapper();
-builder.Services.AddSingleton(mapper);
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 PessoaDependecyInjection.Register(builder.Services);
 
@@ -49,8 +43,7 @@ builder.Services.AddSwaggerGen(c =>
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
-
-  
+    
 });
 
 builder.Services.AddCors();

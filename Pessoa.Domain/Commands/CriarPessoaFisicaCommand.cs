@@ -1,4 +1,5 @@
-﻿using Pessoa.Domain.Commands.Base;
+﻿using MediatR;
+using Pessoa.Domain.Commands.Base;
 
 namespace Pessoa.Domain.Commands;
 
