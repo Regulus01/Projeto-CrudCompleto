@@ -39,6 +39,6 @@ public class EnderecoMap : IEntityTypeConfiguration<Endereco>
             .WithOne(x => x.Endereco)
             .HasForeignKey<PessoaJuridica>(x => x.EnderecoId);
 
-        builder.ToTable("End_Endereco");
+        builder.ToTable("End_Endereco", "Usuario");
     }
 }

@@ -8,16 +8,18 @@ public class BasePessoaMap<TDomain> : IEntityTypeConfiguration<TDomain>
     where TDomain : global::Pessoa.Domain.Entities.Pessoa
 {
     private readonly string _tableName;
+    private readonly string _schemeName;
     
-    public BasePessoaMap(string tableName = "")
+    public BasePessoaMap(string tableName = "", string scheme = "")
     {
         _tableName = tableName;
+        _schemeName = scheme;
     }
 
     public virtual void Configure(EntityTypeBuilder<TDomain> builder)
     {
         if (!string.IsNullOrEmpty(_tableName))
-            builder.ToTable(_tableName);
+            builder.ToTable(_tableName, _schemeName);
 
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id)

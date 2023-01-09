@@ -3,6 +3,7 @@ using System;
 using Infra.Pessoa.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infra.Pessoa.Migrations
 {
     [DbContext(typeof(PessoaContext))]
-    partial class PessoaContextModelSnapshot : ModelSnapshot
+    [Migration("20230109203539_Alteracao_SchemasDasTabelas")]
+    partial class AlteracaoSchemasDasTabelas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

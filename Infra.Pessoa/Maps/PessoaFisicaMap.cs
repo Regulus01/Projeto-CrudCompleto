@@ -7,7 +7,7 @@ namespace Infra.Pessoa.Maps;
 
 public class PessoaFisicaMap : BasePessoaMap<PessoaFisica>
 {
-    public PessoaFisicaMap() : base("PeF_PessoaFisica")
+    public PessoaFisicaMap() : base("PeF_PessoaFisica", "Usuario")
     {
     }
 
