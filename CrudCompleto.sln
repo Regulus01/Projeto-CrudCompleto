@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.CrossCruting", "Infra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.Pessoa", "Infra\Infra.Pessoa\Infra.Pessoa.csproj", "{72FFC14D-2D4C-42B0-8B91-A19ABDAE24B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Pessoa.API", "Services\Services.Pessoa.API\Services.Pessoa.API.csproj", "{47FB0594-4CE3-4AF7-99F8-8FB9EB77FC46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Pessoa", "Services\Services.Pessoa\Services.Pessoa.csproj", "{47FB0594-4CE3-4AF7-99F8-8FB9EB77FC46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
