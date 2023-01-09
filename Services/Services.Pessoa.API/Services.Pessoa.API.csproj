@@ -10,6 +10,7 @@
     <ItemGroup>
         <PackageReference Include="EntityFrameworkCore.Extensions" Version="5.0.0" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+        <PackageReference Include="Npgsql" Version="7.0.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
@@ -19,7 +20,8 @@
     </PropertyGroup>
     
     <ItemGroup>
-      <ProjectReference Include="..\Infra.Pessoa\Infra.Pessoa.csproj" />
+      <ProjectReference Include="..\..\Application\Pessoa.Application\Pessoa.Application.csproj" />
+      <ProjectReference Include="..\..\Infra\Infra.Pessoa\Infra.Pessoa.csproj" />
     </ItemGroup>
 
 </Project>

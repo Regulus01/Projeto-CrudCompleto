@@ -12,8 +12,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Infra.CrossCruting\Infra.CrossCruting.csproj" />
-      <ProjectReference Include="..\Pessoa.Domain\Pessoa.Domain.csproj" />
+      <ProjectReference Include="..\..\Domain\Pessoa.Domain\Pessoa.Domain.csproj" />
+      <ProjectReference Include="..\..\Infra\Infra.CrossCruting\Infra.CrossCruting.csproj" />
     </ItemGroup>
 
 </Project>
