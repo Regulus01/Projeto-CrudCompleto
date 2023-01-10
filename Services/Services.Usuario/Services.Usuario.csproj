@@ -4,14 +4,12 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>Pessoa.API</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="EntityFrameworkCore.Extensions" Version="5.0.0" />
-        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
-        <PackageReference Include="Npgsql" Version="7.0.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
@@ -19,10 +17,11 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <NoWarn>$(NoWarn);1591</NoWarn>
     </PropertyGroup>
-    
+
     <ItemGroup>
-      <ProjectReference Include="..\..\Application\Pessoa.Application\Pessoa.Application.csproj" />
-      <ProjectReference Include="..\..\Infra\Infra.Pessoa\Infra.Pessoa.csproj" />
+      <ProjectReference Include="..\..\Application\Authentication.Application\Authentication.Application.csproj" />
+      <ProjectReference Include="..\..\Domain\Authentication.Domain\Authentication.Domain.csproj" />
+      <ProjectReference Include="..\..\Infra\Infra.Usuario\Infra.Usuario.csproj" />
     </ItemGroup>
 
 </Project>
